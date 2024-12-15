@@ -1,0 +1,196 @@
+services:
+  # Odoo 18.0
+  odoo18:
+    image: odoo:18.0
+    depends_on:
+      - db18
+    ports:
+      - "${ODOO18_PORT:-8018}:8069"
+    volumes:
+      - ./v18/addons:/mnt/extra-addons
+      - ./v18/custom-addons:/mnt/custom-addons
+      - ./v18/enterprise:/mnt/enterprise
+      - odoo18-data:/var/lib/odoo
+    environment:
+      - HOST=db18
+      - USER=${DB_USER:-odoo}
+      - PASSWORD=${DB_PASSWORD:-odoo}
+      - ADDONS_PATH=/mnt/enterprise,/mnt/extra-addons,/mnt/custom-addons
+      - DB_HOST=db18
+      - DB_PORT=5432
+      - DB_USER=${DB_USER:-odoo}
+      - DB_PASSWORD=${DB_PASSWORD:-odoo}
+    restart: unless-stopped
+
+  db18:
+    image: postgres:15
+    environment:
+      - POSTGRES_DB=postgres
+      - POSTGRES_PASSWORD=${DB_PASSWORD:-odoo}
+      - POSTGRES_USER=${DB_USER:-odoo}
+    volumes:
+      - db18-data:/var/lib/postgresql/data
+
+  # Odoo 17.0
+  odoo17:
+    image: odoo:17.0
+    depends_on:
+      - db17
+    ports:
+      - "${ODOO17_PORT:-8017}:8069"
+    volumes:
+      - ./v17/addons:/mnt/extra-addons
+      - ./v17/custom-addons:/mnt/custom-addons
+      - ./v17/enterprise:/mnt/enterprise
+      - odoo17-data:/var/lib/odoo
+    environment:
+      - HOST=db17
+      - USER=${DB_USER:-odoo}
+      - PASSWORD=${DB_PASSWORD:-odoo}
+      - ADDONS_PATH=/mnt/enterprise,/mnt/extra-addons,/mnt/custom-addons
+      - DB_HOST=db17
+      - DB_PORT=5432
+    restart: unless-stopped
+
+  db17:
+    image: postgres:15
+    environment:
+      - POSTGRES_DB=postgres
+      - POSTGRES_PASSWORD=${DB_PASSWORD:-odoo}
+      - POSTGRES_USER=${DB_USER:-odoo}
+    volumes:
+      - db17-data:/var/lib/postgresql/data
+
+  # Odoo 16.0
+  odoo16:
+    image: odoo:16.0
+    depends_on:
+      - db16
+    ports:
+      - "${ODOO16_PORT:-8016}:8069"
+    volumes:
+      - ./v16/addons:/mnt/extra-addons
+      - ./v16/custom-addons:/mnt/custom-addons
+      - ./v16/enterprise:/mnt/enterprise
+      - odoo16-data:/var/lib/odoo
+    environment:
+      - HOST=db16
+      - USER=${DB_USER:-odoo}
+      - PASSWORD=${DB_PASSWORD:-odoo}
+      - ADDONS_PATH=/mnt/enterprise,/mnt/extra-addons,/mnt/custom-addons
+      - DB_HOST=db16
+      - DB_PORT=5432
+    restart: unless-stopped
+
+  db16:
+    image: postgres:13
+    environment:
+      - POSTGRES_DB=postgres
+      - POSTGRES_PASSWORD=${DB_PASSWORD:-odoo}
+      - POSTGRES_USER=${DB_USER:-odoo}
+    volumes:
+      - db16-data:/var/lib/postgresql/data
+
+  # Odoo 15.0
+  odoo15:
+    image: odoo:15.0
+    depends_on:
+      - db15
+    ports:
+      - "${ODOO15_PORT:-8015}:8069"
+    volumes:
+      - ./v15/addons:/mnt/extra-addons
+      - ./v15/custom-addons:/mnt/custom-addons
+      - ./v15/enterprise:/mnt/enterprise
+      - odoo15-data:/var/lib/odoo
+    environment:
+      - HOST=db15
+      - USER=${DB_USER:-odoo}
+      - PASSWORD=${DB_PASSWORD:-odoo}
+      - ADDONS_PATH=/mnt/enterprise,/mnt/extra-addons,/mnt/custom-addons
+      - DB_HOST=db15
+      - DB_PORT=5432
+    restart: unless-stopped
+
+  db15:
+    image: postgres:13
+    environment:
+      - POSTGRES_DB=postgres
+      - POSTGRES_PASSWORD=${DB_PASSWORD:-odoo}
+      - POSTGRES_USER=${DB_USER:-odoo}
+    volumes:
+      - db15-data:/var/lib/postgresql/data
+
+  # Odoo 14.0
+  odoo14:
+    image: odoo:14.0
+    depends_on:
+      - db14
+    ports:
+      - "${ODOO14_PORT:-8014}:8069"
+    volumes:
+      - ./v14/addons:/mnt/extra-addons
+      - ./v14/custom-addons:/mnt/custom-addons
+      - ./v14/enterprise:/mnt/enterprise
+      - odoo14-data:/var/lib/odoo
+    environment:
+      - HOST=db14
+      - USER=${DB_USER:-odoo}
+      - PASSWORD=${DB_PASSWORD:-odoo}
+      - ADDONS_PATH=/mnt/enterprise,/mnt/extra-addons,/mnt/custom-addons
+      - DB_HOST=db14
+      - DB_PORT=5432
+    restart: unless-stopped
+
+  db14:
+    image: postgres:13
+    environment:
+      - POSTGRES_DB=postgres
+      - POSTGRES_PASSWORD=${DB_PASSWORD:-odoo}
+      - POSTGRES_USER=${DB_USER:-odoo}
+    volumes:
+      - db14-data:/var/lib/postgresql/data
+
+  # Odoo 13.0
+  odoo13:
+    image: odoo:13.0
+    depends_on:
+      - db13
+    ports:
+      - "${ODOO13_PORT:-8013}:8069"
+    volumes:
+      - ./v13/addons:/mnt/extra-addons
+      - ./v13/custom-addons:/mnt/custom-addons
+      - ./v13/enterprise:/mnt/enterprise
+      - odoo13-data:/var/lib/odoo
+    environment:
+      - HOST=db13
+      - USER=${DB_USER:-odoo}
+      - PASSWORD=${DB_PASSWORD:-odoo}
+      - ADDONS_PATH=/mnt/enterprise,/mnt/extra-addons,/mnt/custom-addons
+      - DB_HOST=db13
+      - DB_PORT=5432
+    restart: unless-stopped
+
+  db13:
+    image: postgres:13
+    environment:
+      - POSTGRES_DB=postgres
+      - POSTGRES_PASSWORD=${DB_PASSWORD:-odoo}
+      - POSTGRES_USER=${DB_USER:-odoo}
+    volumes:
+      - db13-data:/var/lib/postgresql/data
+
+volumes:
+  odoo18-data:
+  db18-data:
+  odoo17-data:
+  db17-data:
+  odoo16-data:
+  db16-data:
+  odoo15-data:
+  db15-data:
+  odoo14-data:
+  db14-data:
+  odoo13-data:
+  db13-data:
